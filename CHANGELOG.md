@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Pilaton/remark-translit-slug/compare/v1.1.0...v1.1.1) (2025-02-09)
+
+
+### Bug Fixes
+
+* **ci:** refactor workflow ([5db0e74](https://github.com/Pilaton/remark-translit-slug/commit/5db0e742bd20c4c81c4871e927411c429a6c3bab))
+
 ## [1.1.0](https://github.com/Pilaton/remark-translit-slug/compare/v1.0.0...v1.1.0) (2025-02-09)
 
 
