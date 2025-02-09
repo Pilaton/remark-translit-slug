@@ -1,6 +1,6 @@
 # remark-translit-slug
 
-![npm](https://img.shields.io/npm/v/remark-translit-slug?style=for-the-badge&logo=npm&logoColor=white&labelColor=CB3837&color=CB3837)
+[![npm](https://img.shields.io/npm/v/remark-translit-slug?style=for-the-badge&logo=npm&logoColor=white&labelColor=CB3837&color=CB3837)](https://www.npmjs.com/package/remark-translit-slug)
 
 A plugin for [remark](https://github.com/remarkjs/remark) that transliterates headers into slug identifiers.  
 Most major languages are supported. The full list can be seen [here](https://github.com/sindresorhus/transliterate#supported-languages).
