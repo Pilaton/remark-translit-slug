@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 23.x]
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@main
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@master
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Run test
+        run: pnpm run test
+
+  release-please-action:
+    needs: ['test']
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@main
+        id: release-action
+        with:
+          release-type: node
+    outputs:
+      is-release-created: ${{ steps.release-action.outputs.release_created }}
+
+  release:
+    needs: ['release-please-action']
+    if: ${{ needs.release-please-action.outputs.is-release-created == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - uses: actions/setup-node@main
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@master
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build package
+        run: pnpm run build
+
+      - name: Publish to npm
+        run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

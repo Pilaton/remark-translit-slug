@@ -1,0 +1,51 @@
+{
+  "name": "remark-translit-slug",
+  "version": "0.1.0",
+  "description": "A remark plugin that transliterates headers into slug-IDs.",
+  "keywords": [
+    "remark",
+    "markdown",
+    "plugin",
+    "slug",
+    "transliteration",
+    "slugify",
+    "next"
+  ],
+  "bugs": {
+    "url": "https://github.com/Pilaton/remark-translit-slug/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pilaton/remark-translit-slug.git"
+  },
+  "license": "MIT",
+  "author": "Pilaton <dev@pilaton.com> (https://pilaton.com)",
+  "type": "module",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "default": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "check": "tsc --noEmit",
+    "lint:dryRun": "biome check .",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@sindresorhus/slugify": "^2.2.1",
+    "mdast-util-to-string": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@tsconfig/node-lts": "^22.0.1",
+    "@types/mdast": "^4.0.4",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
