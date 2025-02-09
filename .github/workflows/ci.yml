@@ -25,14 +25,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -59,30 +51,13 @@ jobs:
     needs: ['release-please-action']
     if: ${{ needs.release-please-action.outputs.is-release-created == 'true' }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - name: NPM
-            registry: https://registry.npmjs.org/
-            token-name: NPM_TOKEN
-          - name: GitHub Packages
-            registry: https://npm.pkg.github.com/
-            token-name: GITHUB_TOKEN
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
           node-version: '23.x'
-          registry-url: ${{ matrix.registry }}
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -95,8 +70,8 @@ jobs:
       - name: Build package
         run: pnpm run build
 
-      - name: Publish to ${{ matrix.name }}
-        run: pnpm publish --access public --no-git-checks
+      - name: Publish to npm
+        run: pnpm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets[matrix.token-name] }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
