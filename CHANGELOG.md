@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/Pilaton/remark-translit-slug/compare/v1.1.2...v1.1.3) (2025-02-09)
+
+
+### Bug Fixes
+
+* **docs:** Add link to npmjs ([64b077a](https://github.com/Pilaton/remark-translit-slug/commit/64b077a2587a311518d5b154d85e6b6d53e27e5d))
+
 ## [1.1.2](https://github.com/Pilaton/remark-translit-slug/compare/v1.1.1...v1.1.2) (2025-02-09)
 
 
