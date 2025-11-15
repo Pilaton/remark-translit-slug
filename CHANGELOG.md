@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Pilaton/remark-translit-slug/compare/v1.1.3...v1.2.0) (2025-11-15)
+
+
+### Features
+
+* add options to preserve custom ids ([ab715b2](https://github.com/Pilaton/remark-translit-slug/commit/ab715b2fb2f18a361bce962325b9a0343daaec16))
+
 ## [1.1.3](https://github.com/Pilaton/remark-translit-slug/compare/v1.1.2...v1.1.3) (2025-02-09)
 
 
