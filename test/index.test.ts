@@ -94,6 +94,28 @@ describe('remarkTranslitSlug Plugin (minimal tests)', () => {
     });
   });
 
+    it('should not overwrite an existing id by default', () => {
+    const existingIdHeading = createHeading('Heading with existing id', 2, {
+      hProperties: { id: 'predefined-id' },
+    });
+    const tree = createRoot([existingIdHeading]);
+
+    remarkTranslitSlug()(tree);
+
+    expect(existingIdHeading.data.hProperties.id).toBe('predefined-id');
+  });
+
+  it('should overwrite an existing id when preserveExistingIds is false', () => {
+    const existingIdHeading = createHeading('Heading with existing id', 2, {
+      hProperties: { id: 'predefined-id' },
+    });
+    const tree = createRoot([existingIdHeading]);
+
+    remarkTranslitSlug({ preserveExistingIds: false })(tree);
+
+    expect(existingIdHeading.data.hProperties.id).toBe('heading-with-existing-id');
+  });
+
   it('should leave non-heading nodes unmodified', () => {
     // Create a minimal tree with a non-heading node (e.g., a paragraph).
     const tree = {

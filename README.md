@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/remark-translit-slug?style=for-the-badge&logo=npm&logoColor=white&labelColor=CB3837&color=CB3837)](https://www.npmjs.com/package/remark-translit-slug)
 
 A plugin for [remark](https://github.com/remarkjs/remark) that transliterates headers into slug identifiers.  
-Most major languages are supported. The full list can be seen [here](https://github.com/sindresorhus/transliterate#supported-languages).
+Most major languages are supported. The full list can be [seen here](https://github.com/sindresorhus/transliterate#supported-languages).
 
 ## Install
 
@@ -16,15 +16,16 @@ npm install remark-translit-slug
 Plug the plugin into your remark processing chain:
 
 ```js
-import { remark } from 'remark';
-import remarkTranslitSlug from 'remark-translit-slug';
-import remarkToc from 'remark-toc';
+import { remark } from "remark";
+import remarkTranslitSlug from "remark-translit-slug";
+import remarkToc from "remark-toc";
 
 const file = await remark()
   .use(remarkTranslitSlug, {
-    separator: '-', // Separator for slug (default '-')
+    separator: "-", // Separator for slug (default '-')
     lowercase: true, // Make the slug lowercase (defaults to true)
     decamelize: false, // Convert camelcase to separate words. Internally it does fooBar → foo bar. (defaults to false)
+    preserveExistingIds: true, // Keep user-defined ids instead of overwriting them (defaults to true)
   })
   .use(remarkToc);
 ```
@@ -32,7 +33,7 @@ const file = await remark()
 Example usage with `next.js --turbopack` + `@next/mdx`:
 
 ```js
-import createMdx from '@next/mdx';
+import createMdx from "@next/mdx";
 
 // nextConfig ...
 
@@ -40,16 +41,16 @@ const withMdx = createMdx({
   options: {
     remarkPlugins: [
       [
-        'remark-translit-slug',
+        "remark-translit-slug",
         {
-          separator: '-',
+          separator: "-",
           lowercase: true,
         },
       ],
       [
-        'remark-toc',
+        "remark-toc",
         {
-          heading: 'table-of-contents',
+          heading: "table-of-contents",
           tight: true,
           maxDepth: 3,
         },

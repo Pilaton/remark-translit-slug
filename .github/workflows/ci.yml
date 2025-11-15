@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [20.x, 23.x]
+        node-version: [22.x, 25.x]
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +37,7 @@ jobs:
         run: pnpm run test
 
   release-please-action:
-    needs: ['test']
+    needs: ["test"]
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v4
@@ -48,7 +48,7 @@ jobs:
       is-release-created: ${{ steps.release-action.outputs.release_created }}
 
   release:
-    needs: ['release-please-action']
+    needs: ["release-please-action"]
     if: ${{ needs.release-please-action.outputs.is-release-created == 'true' }}
     runs-on: ubuntu-latest
     steps:
@@ -56,8 +56,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '23.x'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4

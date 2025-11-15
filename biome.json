@@ -1,26 +1,26 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
   "files": {
-    "include": ["src"],
-    "ignore": ["build", "coverage", "node_modules", "package.json"]
+    "includes": ["**/src/**", "!**/build", "!**/coverage", "!**/node_modules", "!**/package.json"]
   },
   "formatter": {
     "indentStyle": "space",
     "lineWidth": 100
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
-      "all": true,
       "style": {
         "noDefaultExport": "off"
       },
       "correctness": {
-        "noNodejsModules": "off"
-      }
+        "noNodejsModules": "off",
+        "noUndeclaredDependencies": "off",
+        "useImportExtensions": "off",
+        "noUnusedImports": { "fix": "safe", "level": "warn", "options": {} }
+      },
+      "suspicious": { "noAssignInExpressions": "off" }
     }
   },
   "javascript": {
